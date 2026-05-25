@@ -55,8 +55,9 @@ After several weeks of heavy testing, I evaluated the following set of photogram
 
 ***Note: I can definitely go further by setting up a better VM with GPU configuration, but what I realized is that photogrammetry is heavily dependent on local hardware resources. My RTX 5060 with 8 GB VRAM and 16 GB RAM is a decent setup, but it starts falling behind when processing scenes with more than ~400 images for reconstruction. More serious photogrammetry projects typically require up to 1,000 images. Another constraint is that Phone cameras are not suitable for quality indoor captures either. If you're interested in going deeper, I highly recommend this YouTube video, which covers a lot of valuable info about the topic: https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s***
 
+
+![image](/assets/image.png)
+
 #### Gaussian Splats tools (Generative techniques)
 
 On the other side, I've been exploring generative techniques as well as Gaussian Splats. So far, my favorite tool — and the one I'm going to use to generate the replica of my environment — is Marble Labs. I'm also going to use Gaussian Splats for this pipeline.
-
-![image](/assets/image.png)
