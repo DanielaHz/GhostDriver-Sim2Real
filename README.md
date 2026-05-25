@@ -28,7 +28,9 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 
 ## Project Overview 
 
-- Create a virtual replica of the tree environemntes living room, stairs and room.
+- Create a virtual replica of the tree environemntes living room, stairs and room. 
+- 
+- Create different indoor environments to teach basic movement behaviour to the drone 
 
 - Train a virtual drone using reinforcement learning, allowing it to learn movement, stability, and navigation behaviours through interaction with the simulated environment.
 
@@ -41,14 +43,17 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 ## Progress 
 ### 1. Photogrametry and 3D environment creation
 
-The goal is to generate realistic 3D environments that match the real world as closely as possible. I’m currently testing four options:
+The goal is to generate realistic 3D environments that match the real world as closely as possible. I’m currently testing four options to replicate this real world fidelity:
 
-- Polycam: Produces good results, but not quite accurate enough for reliable drone‑training environments.
+#### Photogrametry tools.
 
-- Scanniverse: Decent and free, but the scene ends up heavily distorted.
+After several weeks of heavy testing, I evaluated the following set of photogrammetry tools. Below you'll find a summary of results and, further on, examples of the output obtained.
 
-- COLMAP: I’m facing issues importing the images into the scene, the workflow is quite tricky.
+- `Polycam`: Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an iPhone 13 Pro, iPhone 15, and iPhone 16 Pro Max.
+- `Scanniverse`: Decent and free, but scenes end up heavily distorted, so like Polycam it's not a suitable tool for this purpose.
+- `COLMAP`: I ran into issues importing images into the scene — the workflow is quite tricky. It's also very resource-intensive, and generating a single scene takes a long time, which is not what I needed.
+- `RealityScan`: So far, the app delivering the best results — unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. A real shame. I tried using Boxes to set up a VM with Windows 10, but Boxes doesn't allow GPU resource assignment, making it impossible to run Unreal Engine or even complete the image alignment step.
 
-- RealityScan: So far, the app delivering the best results.
+**Note: I can definitely go further by setting up a better VM with GPU configuration, but what I realized is that photogrammetry is heavily dependent on local hardware resources. My RTX 5060 with 8 GB VRAM and 16 GB RAM is a decent setup, but it starts falling behind when processing scenes with more than ~400 images for reconstruction. More serious photogrammetry projects typically require up to 1,000 images. Another constraint is that Phone cameras are not suitable for quality indoor captures either. If you're interested in going deeper, I highly recommend this YouTube video, which covers a lot of valuable info about the topic: https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s**
 
 ![image](/assets/image.png)
