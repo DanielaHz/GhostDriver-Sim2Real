@@ -38,14 +38,13 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation.
 
-- ![](/assets/drone_rl_sim_to_real_pipeline.svg)
+## Progress Documentation 
 
-## Progress 
-### 1. Photogrametry and 3D environment creation
+### 1.  3D environment creation
 
 The goal is to generate realistic 3D environments that match the real world as closely as possible. I’m currently testing four options to replicate this real world fidelity:
 
-#### Photogrametry tools.
+#### Photogrametry tools (Geometry recosntruction ).
 
 After several weeks of heavy testing, I evaluated the following set of photogrammetry tools. Below you'll find a summary of results and, further on, examples of the output obtained.
 
@@ -55,5 +54,9 @@ After several weeks of heavy testing, I evaluated the following set of photogram
 - `RealityScan`: So far, the app delivering the best results — unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. A real shame. I tried using Boxes to set up a VM with Windows 10, but Boxes doesn't allow GPU resource assignment, making it impossible to run Unreal Engine or even complete the image alignment step.
 
 **Note: I can definitely go further by setting up a better VM with GPU configuration, but what I realized is that photogrammetry is heavily dependent on local hardware resources. My RTX 5060 with 8 GB VRAM and 16 GB RAM is a decent setup, but it starts falling behind when processing scenes with more than ~400 images for reconstruction. More serious photogrammetry projects typically require up to 1,000 images. Another constraint is that Phone cameras are not suitable for quality indoor captures either. If you're interested in going deeper, I highly recommend this YouTube video, which covers a lot of valuable info about the topic: https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s**
+
+#### Gaussian Splats tools (Generative techniques)
+
+On the other side, I've been exploring generative techniques as well as Gaussian Splats. So far, my favorite tool — and the one I'm going to use to generate the replica of my environment — is Marble Labs. I'm also going to use Gaussian Splats for this pipeline.
 
 ![image](/assets/image.png)
