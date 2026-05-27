@@ -1,3 +1,4 @@
+
 <pre>🟣 Description</pre>
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
@@ -11,9 +12,7 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 
 <pre>🟣 Drone Model</pre>
 
-<div class="sketchfab-embed-wrapper"> <iframe title="Dji Tello" frameborder="0" allowfullscreen mozallowfullscreen="true" webkitallowfullscreen="true" allow="autoplay; fullscreen; xr-spatial-tracking" xr-spatial-tracking execution-while-out-of-viewport execution-while-not-rendered web-share src="https://sketchfab.com/models/36365bad0ebd46428e6241676725dcec/embed"> </iframe> <p style="font-size: 13px; font-weight: normal; margin: 5px; color: #4A4A4A;"> <a href="https://sketchfab.com/3d-models/dji-tello-36365bad0ebd46428e6241676725dcec?utm_medium=embed&utm_campaign=share-popup&utm_content=36365bad0ebd46428e6241676725dcec" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Dji Tello </a> by <a href="https://sketchfab.com/Temooor?utm_medium=embed&utm_campaign=share-popup&utm_content=36365bad0ebd46428e6241676725dcec" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;"> Temoor </a> on <a href="https://sketchfab.com?utm_medium=embed&utm_campaign=share-popup&utm_content=36365bad0ebd46428e6241676725dcec" target="_blank" rel="nofollow" style="font-weight: bold; color: #1CAAD9;">Sketchfab</a></p></div>
-
-![](assets/DJI.png)
+![](assets/ilya-landshut-8.jpg)
 
 The drone used in this project is the DJI Ryze Tello. It includes a vision‑positioning system with a downward‑facing camera and a 3D infrared module located on the underside of the aircraft. The drone operates at altitudes ranging from 1 to 98.4 ft. Its specifications are:
 
@@ -87,3 +86,4 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 
 ## Resources 
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
+- https://ilyalandshut.artstation.com/projects/xzWeDY
