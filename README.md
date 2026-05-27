@@ -37,7 +37,7 @@ The drone used in this project is the `DJI Ryze Tello`. It includes a vision‑p
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
 ```
 
-<pre>🟣 3D environment creation </pre>
+<pre>🟣 3D environment creation for training </pre>
 
 <pre>🟣 1. Progress Documentation </pre>
 
@@ -60,7 +60,7 @@ Below is a summary of the tools I tested and their results:
 |`Polycam`| Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an iPhone 13 Pro, iPhone 15, and iPhone 16 Pro Max.                                                                                                                                                                                                                           | ![image](/assets/Polycam.png) |
 |`RealityScan`| So far, the app delivering the best results, unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. | ![image](/assets/image.png)   |
 
-<pre>🟣 3. Generative techniques tools (gaussian splats) </pre>
+<pre>🟣 3. Generative techniques tools (gaussian splats)</pre>
 
 Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble Labs`, great gaussian splats reconstruction.
 
@@ -83,7 +83,9 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 
 ![](assets/pipeline.svg)
 
-<pre>🟣 3DGS Database training environments </pre>
+<pre>🟣 3DGS Database pre-training environments </pre>
+
+On Hugging Face there is a dataset available named `InteriorGS`. It provides high-quality 3D Gaussian Splatting representations with semantic bounding boxes and occupancy maps for each scene. It contains a total of 1,000 environments.
 
 ## Resources 
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
