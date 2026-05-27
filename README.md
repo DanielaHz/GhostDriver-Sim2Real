@@ -75,10 +75,10 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 |-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|---------------|
 | `unreal-splat`                      | Open source, compiles on Linux, but I haven't tested it yet.                                                                                           | https://github.com/JI20/unreal-splat  | Yes           |
 | `voligna`                           | Paid plugin, doesn't compile on any Linux version I tried. Source code is not available, so there is nothing I can do about it.                        | https://web.volinga.ai/#VolingaPlugin | Apparently yes |
-| `MSLabsGaussianSplattingRenderer-UE`| Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE | No            |
+| `MSLabsGaussian<br/>SplattingRenderer<br/>-UE`| Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE | No            |
 | `xverse`                            | Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/xverse-engine/XScene-UEPlugin | No            |
-| `NanoGaussianSplatting`             | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering.                               | https://github.com/TimChen1383/NanoGaussianSplatting | Yes           |
-| `GaussianSplattingForUnrealEngine`  | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files.                | https://github.com/Italink/GaussianSplattingForUnrealEngine | Yes           |
+| `NanoGaussian<br/>Splatting`             | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering.                               | https://github.com/TimChen1383/NanoGaussianSplatting | Yes           |
+| `GaussianSplatting<br/>ForUnrealEngine`  | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files.                | https://github.com/Italink/GaussianSplattingForUnrealEngine | Yes           |
 
 ### Virtual environment pipeline
 
