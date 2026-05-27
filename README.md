@@ -71,14 +71,15 @@ Alongisde, I've been exploring generative techniques and so far, my favorite too
 
 Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search for plugins. Most of them were also only packaged for Windows, which is a very common issue with plugins. Rebuilding and configuring the source code for Linux compatibility isn't too much effort in theory, but most public repos don't include the plugin's source code, making it impossible to get them working on Linux. This is what I found with the following plugins:
 
-| Plugin                                        | Opinion                                                                                                                                                | Link                                  | 
-|-----------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|
-| `unreal-splat`                                | Open source, compiles on Linux, but I haven't tested it yet.                                                                                           | https://github.com/JI20/unreal-splat  | 
-| `voligna`                                     | Paid plugin, doesn't compile on any Linux version I tried. Source code is not available, so there is nothing I can do about it.                        | https://web.volinga.ai/#VolingaPlugin | 
-| `MSLabsGaussian` | Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE |
-| `xverse`                                      | Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/xverse-engine/XScene-UEPlugin | 
-| `NanoGaussianSplatting`                       | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering.                               | https://github.com/TimChen1383/NanoGaussianSplatting | 
-| `GaussianSplatting`                           | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files.                | https://github.com/Italink/GaussianSplattingForUnrealEngine | 
+| Plugin                                        | Link                                 | Opinion |
+|-----------------------------------------------|--------------------------------------| - |
+| `unreal-splat`                                | https://github.com/JI20/unreal-splat  | Open source, compiles on Linux, but I haven't tested it yet. |
+| `voligna`                                     | https://web.volinga.ai/#VolingaPlugin | Paid plugin, doesn't compile on any Linux version I tried. Source code is not available, so there is nothing I can do about it. |
+| `MSLabsGaussian` | https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE | Open source but no source code available. Compiled plugin works on Windows only |
+| `xverse`                                      | https://github.com/xverse-engine/XScene-UEPlugin | Open source but no source code available. Compiled plugin works on Windows only. |
+| `NanoGaussianSplatting`                       | https://github.com/TimChen1383/NanoGaussianSplatting | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering. |
+| `GaussianSplatting`                           | https://github.com/Italink/GaussianSplattingForUnrealEngine | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files. |
+
 
 ### Virtual environment pipeline
 
