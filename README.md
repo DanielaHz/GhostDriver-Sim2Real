@@ -60,8 +60,9 @@ Below is a summary of the tools I tested and their results:
 
 ### Generative techniques tools (gaussian splats)
 
-Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is Marble Labs, great gaussian splats reconstruction.
+Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble Labs`, great gaussian splats reconstruction.
 
+![](assets/Marble.png)
 
 Now, I said I will use unreal to import and render the gaussian splast, natively unreal doesnt support 3DGS so I was looking to differnt plugins to help me, thsi si my summary of the repos I tested.
 
