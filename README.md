@@ -42,7 +42,7 @@ The drone used in this project is the `DJI Ryze Tello`. It includes a vision‑p
 
 <pre>🟣 1. Progress Documentation </pre>
 
-The Ryze Tello (DJI) primarily perceives its environment through its forward-facing camera, making realistic visual environments critical for training. That's why my focus is on representing the world as realistically as possible. Below you will find the different techniques I've explored to achieve this goal, and further on, my pipeline for this task.
+The `Ryze Tello (DJI)` primarily perceives its environment through its forward-facing camera, making realistic visual environments critical for training. That's why my focus is on representing the world as realistically as possible. Below you will find the different techniques I've explored to achieve this goal, and further on, my pipeline for this task.
 
 <pre>🟣 2. Geometry reconstruction tools (point clouds) </pre>
 
@@ -58,18 +58,18 @@ Below is a summary of the tools I tested and their results:
 
 | Tools | Results                                                                                                                                                                                                                                                                                                                                                                             | Image                         |
 |-------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|
-|`Polycam`| Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an iPhone 13 Pro, iPhone 15, and iPhone 16 Pro Max.                                                                                                                                                                                                                           | ![image](/assets/Polycam.png) |
-|`RealityScan`| So far, the app delivering the best results, unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. | ![image](/assets/image.png)   |
+|`Polycam`| Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an `iPhone 13 Pro`, `iPhone 15`, and `iPhone 16 Pro Max`.                                                                                                                                                                                                                           | ![image](/assets/Polycam.png) |
+|`RealityScan`| So far, the app delivering the best results, unfortunately, for `Linux` users it only runs under `Wine`, which means no export, import, or mesh manipulation tools are available. | ![image](/assets/image.png)   |
 
 <pre>🟣 3. Generative techniques tools (gaussian splats)</pre>
 
-Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble Labs`, great gaussian splats reconstruction.
+Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble World Labs`.
 
 ![](assets/example.png)
 
 <pre>🟣 4. 3DGS in Unreal Engine </pre>
 
-Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search for plugins. Most of them were also only packaged for Windows, which is a very common issue with plugins. Rebuilding and configuring the source code for Linux compatibility isn't too much effort in theory, but most public repos don't include the plugin's source code, making it impossible to get them working on Linux. This is what I found with the following plugins:
+Natively, `Unreal Engine` doesn't support `3D Gaussian Splats`, so I had to search for plugins. Most of them were also only packaged for `Windows`, which is a very common issue with plugins. Rebuilding and configuring the source code for `Linux` compatibility isn't too much effort in theory, but most public repos don't include the plugin's source code, making it impossible to get them working on `Linux`. This is what I found with the following plugins:
 
 | Plugin                               | Link                        | Opinion |
 |--------------------------------------|-----------------------------|---------|
