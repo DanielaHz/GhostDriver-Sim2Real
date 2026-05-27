@@ -29,10 +29,13 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 
 <pre>🟣 Project Overview</pre>
 
+```angular2html
 - Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
 - Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, obstacle avoidance, and autonomous navigation through interaction with the simulated environment
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
+
+```
 
 <pre>🟣 3D environment creation </pre>
 
