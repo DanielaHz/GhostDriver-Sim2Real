@@ -33,6 +33,7 @@ The drone used in this project is the `DJI Ryze Tello`. It includes a vision‑p
 ```angular2html
 - Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
+- Setup unreal for simulation (drone physics + camera sensor + environment import)
 - Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, obstacle avoidance, and autonomous navigation through interaction with the simulated environment
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
 ```
@@ -87,6 +88,8 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 
 On Hugging Face there is a dataset available named `InteriorGS`. It provides high-quality 3D Gaussian Splatting representations with semantic bounding boxes and occupancy maps for each scene. It contains a total of 1,000 environments.
 > link: https://huggingface.co/datasets/spatialverse/InteriorGS
+
+<pre>🟣 Unreal simulation setup </pre>
 
 ## Resources 
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
