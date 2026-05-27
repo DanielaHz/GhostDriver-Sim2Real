@@ -2,6 +2,8 @@ This project focuses on training a drone inside Unreal Engine and deploying the 
 
 ## 🟣 Real world description
 
+<pre>🟣 Real world description</pre>
+
 The drone's trajectory begins in the living room and proceeds up a staircase and into my room. The staircase is narrow, and architectural elements such as an angled ceiling introduce further obstacles that increase the complexity of autonomous navigation.
 
 ## Technical stack
