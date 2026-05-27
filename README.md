@@ -1,5 +1,3 @@
-<pre>
-
 <pre>🟣 Description</pre>
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
@@ -7,6 +5,7 @@ This project focuses on training a drone inside Unreal Engine and deploying the 
 The drone's trajectory begins in the living room and proceeds up a staircase and into my room. The staircase is narrow, and architectural elements such as an angled ceiling introduce further obstacles that increase the complexity of autonomous navigation.
 
 <pre>🟣 Technical stack</pre>
+
 - `Unreal Engine 5.6`
 - `Linux Fedora 42`
 
@@ -28,7 +27,7 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 | FPS | 30                  |
 | Video format | MP4                 |
 
-## 4. Project Overview
+## 4. Project Overview 
 ```
 - Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
@@ -36,7 +35,7 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
 ```
 
-## 5. Progress Documentation
+## 5. Progress Documentation 
 
 ### 5.1 3D environment creation
 
@@ -84,7 +83,5 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 
 ### 3DGS Database training environments
 
-## Resources
+## Resources 
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
-
-</pre>
