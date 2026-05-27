@@ -14,16 +14,16 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 The drone used in this project is the DJI Ryze Tello. It includes a vision‑positioning system with a downward‑facing camera and a 3D infrared module located on the underside of the aircraft. The drone operates at altitudes ranging from 1 to 98.4 ft. Its specifications are:
 
 ### Drone Specifications
-|Model| TLW004                        | 
-| --- |-------------------------------| 
-|Weight| 87 gr                         | 
-|Max Speed| 28.8 kph                      | 
-|Max flight time| 13 minutes                    | 
-|Max image size| 2592x1936                     |
-|Video recording | HD: 1280x720                  |
-| FPS | 30                            |
-| Video format | MP4                           |
-| 3D Model | ![](/assets/drone-model.png)  |
+|Model| TLW004              | 
+| --- |---------------------| 
+|Weight| 87 gr               | 
+|Max Speed| 28.8 kph            | 
+|Max flight time| 13 minutes          | 
+|Max image size| 2592x1936           |
+|Video recording | HD: 1280x720        |
+| FPS | 30                  |
+| Video format | MP4                 |
+| 3D Model | ![](assets/DJI.png) |
 
 ## Project Overview 
 
