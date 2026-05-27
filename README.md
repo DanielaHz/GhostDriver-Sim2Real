@@ -1,6 +1,29 @@
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
-## 🟣 Real world description
+![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&text=Drone+RL+Project&fontSize=40)
+
+![demo](assets/demo.gif)
+
+![progress](https://img.shields.io/badge/3D_Environment-90%25-green?style=for-the-badge)
+![progress](https://img.shields.io/badge/RL_Training-20%25-orange?style=for-the-badge)
+
+<details>
+<summary>📋 Photogrammetry Tools Tested</summary>
+
+Your table here...
+
+</details>
+
+
+![status](https://img.shields.io/badge/Status-In_Progress-yellow?style=for-the-badge)
+![platform](https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge)
+![engine](https://img.shields.io/badge/Unreal_Engine-5.x-purple?style=for-the-badge)
+
+
+## Contents
+- [Project Overview](#project-overview)
+- [Development Log](#development-log)
+- [3D Environment Creation](#3d-environment-creation)
 
 <pre>🟣 Real world description</pre>
 
