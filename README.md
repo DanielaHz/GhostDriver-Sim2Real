@@ -1,31 +1,6 @@
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
-![header](https://capsule-render.vercel.app/api?type=waving&color=gradient&text=Drone+RL+Project&fontSize=40)
-
-![demo](assets/demo.gif)
-
-![progress](https://img.shields.io/badge/3D_Environment-90%25-green?style=for-the-badge)
-![progress](https://img.shields.io/badge/RL_Training-20%25-orange?style=for-the-badge)
-
-<details>
-<summary>📋 Photogrammetry Tools Tested</summary>
-
-Your table here...
-
-</details>
-
-
-![status](https://img.shields.io/badge/Status-In_Progress-yellow?style=for-the-badge)
-![platform](https://img.shields.io/badge/Platform-Linux-blue?style=for-the-badge)
-![engine](https://img.shields.io/badge/Unreal_Engine-5.x-purple?style=for-the-badge)
-
-
-## Contents
-- [Project Overview](#project-overview)
-- [Development Log](#development-log)
-- [3D Environment Creation](#3d-environment-creation)
-
-<pre>🟣 Real world description</pre>
+## Real world description
 
 The drone's trajectory begins in the living room and proceeds up a staircase and into my room. The staircase is narrow, and architectural elements such as an angled ceiling introduce further obstacles that increase the complexity of autonomous navigation.
 
@@ -53,12 +28,12 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 | Video format | MP4                 |
 
 ## 4. Project Overview 
-```
-- Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
+
+<pre>🟣 Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world</pre>
+- 
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
 - Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, obstacle avoidance, and autonomous navigation through interaction with the simulated environment
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
-```
 
 ## 5. Progress Documentation 
 
