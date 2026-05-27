@@ -1,15 +1,13 @@
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
-## Real world description
-
+<pre>🟣 Real world description</pre>
 The drone's trajectory begins in the living room and proceeds up a staircase and into my room. The staircase is narrow, and architectural elements such as an angled ceiling introduce further obstacles that increase the complexity of autonomous navigation.
 
-## Technical stack
-
+<pre>🟣 Technical stack</pre>
 - `Unreal Engine 5.6`
 - `Linux Fedora 42`
 
-## Drone Model
+<pre>🟣 Drone Model</pre>
 
 ![](assets/DJI.png)
 
@@ -28,12 +26,12 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 | Video format | MP4                 |
 
 ## 4. Project Overview 
-
-<pre>🟣 Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world</pre>
-- 
+```
+- Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
 - Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, obstacle avoidance, and autonomous navigation through interaction with the simulated environment
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
+```
 
 ## 5. Progress Documentation 
 
