@@ -1,5 +1,6 @@
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
+![](assets/Ash.jpeg)
 ## Real word description
 
 The drone's trajectory begins in the living room and proceeds up a staircase and into my room. The staircase is narrow, and architectural elements such as an angled ceiling introduce further obstacles that increase the complexity of autonomous navigation.
@@ -11,11 +12,11 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 
 ## Drone Model
 
+![](assets/DJI.png)
+
 The drone used in this project is the DJI Ryze Tello. It includes a vision‑positioning system with a downward‑facing camera and a 3D infrared module located on the underside of the aircraft. The drone operates at altitudes ranging from 1 to 98.4 ft. Its specifications are:
 
 ### Drone Specifications
-
- ![](assets/DJI.png) 
 
 |Model| TLW004              | 
 | --- |---------------------| 
