@@ -1,0 +1,18 @@
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/Module.NanoGS.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianClusterBuilder.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianGlobalAccumulator.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatActor.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatAsset.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatComponent.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatRenderData.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatRenderer.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatSceneProxy.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatShaders.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/GaussianSplatViewExtension.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/NanoGS.cpp.o"
+"/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Intermediate/Build/Linux/x64/UnrealEditor/Development/NanoGS/PLYFileReader.cpp.o"
+ -soname="libUnrealEditor-NanoGS.so"
+ -rpath-link="/home/danihernandez/Documents/mlstest/Plugins/NanoGS/Binaries/Linux"
+ -L"/home/danihernandez/Downloads/unreal-full-extract/Linux_Unreal_Engine_5.6.1/Engine/Binaries/Linux"
+ --start-group
+ --end-group

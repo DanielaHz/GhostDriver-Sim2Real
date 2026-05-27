@@ -1,0 +1,8 @@
+{
+	"BuildId": "43139311",
+	"Modules": 
+	{
+		"NanoGS": "libUnrealEditor-NanoGS.so",
+		"NanoGSEditor": "libUnrealEditor-NanoGSEditor.so"
+	}
+}
