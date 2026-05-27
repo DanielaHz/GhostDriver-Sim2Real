@@ -12,7 +12,7 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 
 <pre>🟣 Drone Model</pre>
 
-![](assets/ilya-landshut-8.jpg)
+![](assets/ilya-landshut-1.jpg)
 
 The drone used in this project is the DJI Ryze Tello. It includes a vision‑positioning system with a downward‑facing camera and a 3D infrared module located on the underside of the aircraft. The drone operates at altitudes ranging from 1 to 98.4 ft. Its specifications are:
 
@@ -35,7 +35,6 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
 - Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, obstacle avoidance, and autonomous navigation through interaction with the simulated environment
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
-
 ```
 
 <pre>🟣 3D environment creation </pre>
