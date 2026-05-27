@@ -64,7 +64,7 @@ Below is a summary of the tools I tested and their results:
 
 Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble Labs`, great gaussian splats reconstruction.
 
-![](assets/Marble.png)
+![](assets/example.png)
 
 <pre>🟣 4. 3DGS in Unreal Engine </pre>
 
