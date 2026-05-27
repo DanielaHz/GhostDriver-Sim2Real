@@ -1,21 +1,21 @@
 This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
-## Real word description
+## 1. Real word description
 
 The drone's trajectory begins in the living room and proceeds up a staircase and into my room. The staircase is narrow, and architectural elements such as an angled ceiling introduce further obstacles that increase the complexity of autonomous navigation.
 
-## Technical Stack
+## 2. Technical Stack
 
 - `Unreal Engine 5.6`
 - `Linux Fedora 42`
 
-## Drone Model
+## 3. Drone Model
 
 ![](assets/DJI.png)
 
 The drone used in this project is the DJI Ryze Tello. It includes a vision‑positioning system with a downward‑facing camera and a 3D infrared module located on the underside of the aircraft. The drone operates at altitudes ranging from 1 to 98.4 ft. Its specifications are:
 
-### Drone Specifications
+### 3.1 Drone Specifications
 
 |Model| TLW004              | 
 | --- |---------------------| 
@@ -27,7 +27,7 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 | FPS | 30                  |
 | Video format | MP4                 |
 
-## Project Overview 
+## 4. Project Overview 
 ```
 - Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
 - Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
@@ -35,13 +35,13 @@ The drone used in this project is the DJI Ryze Tello. It includes a vision‑pos
 - Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
 ```
 
-## Progress Documentation 
+## 5. Progress Documentation 
 
-### 3D environment creation
+### 5.1 3D environment creation
 
 The Ryze Tello (DJI) primarily perceives its environment through its forward-facing camera, making realistic visual environments critical for training. That's why my focus is on representing the world as realistically as possible. Below you will find the different techniques I've explored to achieve this goal, and further on, my pipeline for this task.
 
-### Geometry reconstruction tools (point clouds)
+#### 5.1.1 Geometry reconstruction tools (point clouds)
 
 After weeks of testing, I decided to move on from photogrammetry techniques for the following reasons:
 ```
@@ -60,13 +60,13 @@ Below is a summary of the tools I tested and their results:
 |`COLMAP`| I ran into issues importing images into the scene, the workflow is quite tricky. It's also very resource-intensive, and generating a single scene takes a long time, which is not what I needed                                                                                                                                                                                     |                               |
 |`RealityScan`| So far, the app delivering the best results, unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. | ![image](/assets/image.png)   |
 
-### Generative techniques tools (gaussian splats)
+### 5.3 Generative techniques tools (gaussian splats)
 
 Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble Labs`, great gaussian splats reconstruction.
 
 ![](assets/Marble.png)
 
-#### 3DGS in Unreal Engine
+#### 5.3.1 3DGS in Unreal Engine
 
 Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search for plugins. Most of them were also only packaged for Windows, which is a very common issue with plugins. Rebuilding and configuring the source code for Linux compatibility isn't too much effort in theory, but most public repos don't include the plugin's source code, making it impossible to get them working on Linux. This is what I found with the following plugins:
 
@@ -79,7 +79,7 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 | `NanoGaussianSplatting`              | [GitHub](https://github.com/TimChen1383/NanoGaussianSplatting) | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering. |
 | `GaussianSplatting`                  | [GitHub](https://github.com/Italink/GaussianSplattingForUnrealEngine) | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files. |
 
-### Virtual environment pipeline
+### 5.4 Virtual environment pipeline
 
 ### 3DGS Database training environments
 
