@@ -12,9 +12,7 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 
 <pre>🟣 Drone Model</pre>
 
-![](assets/ilya-landshut-8.jpg)
-
-![](assets/tello.mp4)
+![](assets/ilya-landshut-1.jpg)
 
 The drone used in this project is the DJI Ryze Tello. It includes a vision‑positioning system with a downward‑facing camera and a 3D infrared module located on the underside of the aircraft. The drone operates at altitudes ranging from 1 to 98.4 ft. Its specifications are:
 
