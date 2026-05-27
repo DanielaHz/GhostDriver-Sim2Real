@@ -54,12 +54,12 @@ After weeks of testing, I decided to move on from photogrammetry techniques for 
 
 Below is a summary of the tools I tested and their results:
 
-| Tools | Description | Image                         |
-|-------|-------------|-------------------------------|
-|`Polycam`| Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an iPhone 13 Pro, iPhone 15, and iPhone 16 Pro Max. | ![image](/assets/Polycam.png) |
-|`Scanniverse`| Decent and free, but scenes end up heavily distorted, so like Polycam it's not a suitable tool for this purpose|                               |
-|`COLMAP`| I ran into issues importing images into the scene, the workflow is quite tricky. It's also very resource-intensive, and generating a single scene takes a long time, which is not what I needed|                               |
-|`RealityScan`|So far, the app delivering the best results, unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. A real shame. I tried using Boxes to set up a VM with Windows 10, but Boxes doesn't allow GPU resource assignment, making it impossible to run Unreal Engine or even complete the image alignment step| ![image](/assets/image.png)   |
+| Tools | Results                                                                                                                                                                                                                                                                                                                                                                              | Image                         |
+|-------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------|
+|`Polycam`| Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an iPhone 13 Pro, iPhone 15, and iPhone 16 Pro Max.                                                                                                                                                                                                                            | ![image](/assets/Polycam.png) |
+|`Scanniverse`| Decent and free, but scenes end up heavily distorted, so like Polycam it's not a suitable tool for this purpose                                                                                                                                                                                                                                                                      |                               |
+|`COLMAP`| I ran into issues importing images into the scene, the workflow is quite tricky. It's also very resource-intensive, and generating a single scene takes a long time, which is not what I needed                                                                                                                                                                                      |                               |
+|`RealityScan`| So far, the app delivering the best results, unfortunately, for Linux users it only runs under Wine, which means no export, import, or mesh manipulation tools are available. A real shame. I tried using Boxes to set up a VM with Windows 10, but Boxes doesn't allow GPU resource assignment, making it impossible to run Unreal Engine or even complete the image alignment step | ![image](/assets/image.png)   |
 
 ### Generative techniques tools (gaussian splats)
 
@@ -67,18 +67,22 @@ Alongisde, I've been exploring generative techniques and so far, my favorite too
 
 ![](assets/Marble.png)
 
-Now, I said I will use unreal to import and render the gaussian splast, natively unreal doesnt support 3DGS so I was looking to differnt plugins to help me, thsi si my summary of the repos I tested.
+#### 3DGS in Unreal Engine
+
+Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search for plugins. Most of them were also only packaged for Windows, which is a very common issue with plugins. Rebuilding and configuring the source code for Linux compatibility isn't too much effort in theory, but most public repos don't include the plugin's source code, making it impossible to get them working on Linux. This is what I found with the following plugins:
+
+| Plugin                              | Opinion                                                                                                                                                | Link                                  | Linux         |
+|-------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------|---------------|
+| `unreal-splat`                      | Open source, compiles on Linux, but I haven't tested it yet.                                                                                           | https://github.com/JI20/unreal-splat  | Yes           |
+| `voligna`                           | Paid plugin, doesn't compile on any Linux version I tried. Source code is not available, so there is nothing I can do about it.                        | https://web.volinga.ai/#VolingaPlugin | Apparently yes |
+| `MSLabsGaussianSplattingRenderer-UE`| Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/mlslabs/MLSLabsGaussianSplattingRenderer-UE | No            |
+| `xverse`                            | Open source but no source code available. Compiled plugin works on Windows only.                                                                       | https://github.com/xverse-engine/XScene-UEPlugin | No            |
+| `NanoGaussianSplatting`             | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering.                               | https://github.com/TimChen1383/NanoGaussianSplatting | Yes           |
+| `GaussianSplattingForUnrealEngine`  | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files.                | https://github.com/Italink/GaussianSplattingForUnrealEngine | Yes           |
 
 ### Virtual environment pipeline
 
-to import the 3d Gaussian into unreal engine I will use GSplugin 
-
-
-# database im going to use to ttrain the model
-
-
-# the paper with the drone specification 
-
+### 3DGS Database training environments
 
 ## Resources 
-- Photogrametry tutorial: https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
+- https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
