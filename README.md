@@ -31,17 +31,10 @@ The drone used in this project is the `DJI Ryze Tello`. It includes a vision‑p
 <pre>🟣 Project Overview</pre>
 
 ```angular2html
-- Design the pipeline with the best tools I can test to create a virtual replica of three 
-environments (living room, staircase, and bedroom) that closely match the real world.
-
-- Research databases to train the drone across diverse indoor environments and expose it 
-to varied movement scenarios.
-
-- Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, 
-obstacle avoidance, and autonomous navigation through interaction with the simulated environment.
-
-- Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical 
-drone to perform autonomous movement in the real world using the skills learned in simulation.
+- Design the pipeline with the best tools I can test to create a virtual replica of three environments (living room, staircase, and bedroom) that closely match the real world
+- Research databases to train the drone across diverse indoor environments and expose it to varied movement scenarios
+- Train a virtual drone using reinforcement learning, enabling it to learn movement, stability, obstacle avoidance, and autonomous navigation through interaction with the simulated environment
+- Export the trained policy and deploy it on a real Ryze Tello (DJI), enabling the physical drone to perform autonomous movement in the real world using the skills learned in simulation
 ```
 
 <pre>🟣 3D environment creation for training </pre>
@@ -55,15 +48,9 @@ The Ryze Tello (DJI) primarily perceives its environment through its forward-fac
 After weeks of testing, I decided to move on from photogrammetry techniques for the following reasons:
 
 ```angular2html
-- Heavily dependent on local hardware. My RTX 5060 with 8 GB VRAM and 16 GB RAM is a decent setup,
-but it falls behind when processing scenes with more than 400 images. Serious photogrammetry projects 
-can require up to 5,000 images for indoor environments.
-
-- Many apps claim you can do photogrammetry with a phone, but phone cameras simply don't deliver the 
-quality needed. Dedicated cameras like the Canon 450D with proper lenses give better results.
-
-- Shooting technique has a real impact on results. Blur is the enemy of photogrammetry, so you often 
-end up reshooting locations multiple times, which is time-consuming.
+- Heavily dependent on local hardware. My RTX 5060 with 8 GB VRAM and 16 GB RAM is a decent setup, but it falls behind when processing scenes with more than 400 images. Serious photogrammetry projects can require up to 5,000 images for indoor environments.
+- Many apps claim you can do photogrammetry with a phone, but phone cameras simply don't deliver the quality needed. Dedicated cameras like the Canon 450D with proper lenses give better results, but cost around £150 used — not worth the investment for this project.
+- Shooting technique has a real impact on results. Blur is the enemy of photogrammetry, so you often end up reshooting locations multiple times, which is time-consuming.
 ```
 
 Below is a summary of the tools I tested and their results:
