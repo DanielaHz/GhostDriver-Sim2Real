@@ -86,6 +86,7 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 <pre>🟣 3DGS Database pre-training environments </pre>
 
 On Hugging Face there is a dataset available named `InteriorGS`. It provides high-quality 3D Gaussian Splatting representations with semantic bounding boxes and occupancy maps for each scene. It contains a total of 1,000 environments.
+> link: https://huggingface.co/datasets/spatialverse/InteriorGS
 
 ## Resources 
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
