@@ -81,6 +81,8 @@ Natively, Unreal Engine doesn't support 3D Gaussian Splats, so I had to search f
 
 <pre>🟣 5. Virtual environment pipeline </pre>
 
+![](assets/pipeline.svg)
+
 <pre>🟣 3DGS Database training environments </pre>
 
 ## Resources 
