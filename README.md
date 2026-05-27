@@ -1,4 +1,4 @@
-This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools — so I want it to be as informative and step-by-step as possible, because I couldn't find any well-documented repository from someone who has tried to do the same. This is my contribution to anyone looking to develop a similar project, or who needs a specific step for their own work.
+This project focuses on training a drone inside Unreal Engine and deploying the learned behaviour onto a real-world drone. I'll be working with robotic simulation in Unreal, developing reinforcement learning policies, potentially exploring LLMs, and using 3D world creation tools.
 
 ## Real word description
 
