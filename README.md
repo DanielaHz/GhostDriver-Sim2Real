@@ -16,18 +16,6 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 
 The drone used in this project is the `DJI Ryze Tello`. It includes a vision‑positioning system with a frontal camera and a 3D infrared module located on the underside of the aircraft.
 
-<pre>🟣 Drone Specifications</pre>
-
-|Model| TLW004              | 
-| --- |---------------------| 
-|Weight| 87 gr               | 
-|Max Speed| 28.8 kph            | 
-|Max flight time| 13 minutes          | 
-|Max image size| 2592x1936           |
-|Video recording | HD: 1280x720        |
-| FPS | 30                  |
-| Video format | MP4                 |
-
 <pre>🟣 Project Overview</pre>
 
 ```angular2html
@@ -90,6 +78,44 @@ On Hugging Face there is a dataset available named `InteriorGS`. It provides hig
 > link: https://huggingface.co/datasets/spatialverse/InteriorGS
 
 <pre>🟣 Unreal simulation setup </pre>
+
+In this step, it is important to set up and import into Unreal the following elements:
+```
+- The 3D model of the drone.
+- The 3DGS of the real-world replica environment, including its bounding boxes and skeletal mesh via NanoGaussianSplatting.
+- The 3DGS pre-training environments (InteriorGS dataset).
+```
+
+<pre>🟣 3D Drone model</pre>
+
+The 3D model have to match with the 3D world in :
+1. Body dimensions  
+
+| Description                  | Dimension (BBOX) | 
+|------------------------------|------------------|
+| `body`                       | 98x92.5x41 mm    | 
+| `body + propellers`          | 174x170x41 mm    | 
+| `body + propellers + guards` | 188x183x46 mm    | 
+
+2. Frontal camera
+
+| Property          | Real Tello value |
+|-------------------|------------------|
+| `Position on body` | Front-center, slightly below top   | 
+| `FOV`             | 82.6°   |
+| `Resolution`      | Resolution   |
+| `Weight`            | 87 gr               | 
+| `Max Speed`         | 28.8 kph            |
+| `Max image size`    | 2592x1936           |
+| `Video recording`   | HD: 1280x720        |
+| `FPS`               | 30                  |
+
+3. Vision Positioning System
+
+| Property             | Real Tello value | 
+|----------------------|------------------|
+| `camera`             | Underside        | 
+| `3D infrared module` | Underside             | 
 
 ## Resources 
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
