@@ -89,7 +89,8 @@ In this step, it is important to set up and import into Unreal the following ele
 <pre>🟣 3D Drone model</pre>
 
 The 3D model have to match with the 3D world in :
-1. Body dimensions  
+
+<pre>🟣 1. Body dimensions  </pre>
 
 | Description                  | Dimension (BBOX) | 
 |------------------------------|------------------|
@@ -97,7 +98,7 @@ The 3D model have to match with the 3D world in :
 | `body + propellers`          | 174x170x41 mm    | 
 | `body + propellers + guards` | 188x183x46 mm    | 
 
-2. Frontal camera
+<pre>🟣 2. Frontal cameras  </pre>
 
 | Property          | Real Tello value |
 |-------------------|------------------|
@@ -110,7 +111,7 @@ The 3D model have to match with the 3D world in :
 | `Video recording`   | HD: 1280x720        |
 | `FPS`               | 30                  |
 
-3. Vision Positioning System
+<pre>🟣 3. Vision Positioning System  </pre>
 
 | Property             | Real Tello value | 
 |----------------------|------------------|
