@@ -9,6 +9,17 @@ The drone's trajectory begins in the living room and proceeds up a staircase and
 
 - `Unreal Engine 5.6`
 - `Linux Fedora 42`
+- `NanoGS - gaussians splatting processing`
+- `unrealcv`
+
+<pre>🟣Hardware Setup </pre>
+
+| Component | Specification                                | 
+|-----------|----------------------------------------------|
+| `CPU`     | Intel Core i5-14400F (10 cores / 20 threads) | 
+| `GPU`     | NVIDIA GeForce RTX 5060 (8 GB VRAM)          | 
+| `RAM`     | 16 GB                                        | 
+| `STORAGE` | 1 TB NVMe SSD         | 
 
 <pre>🟣 Drone Model</pre>
 
@@ -28,11 +39,11 @@ The drone used in this project is the `DJI Ryze Tello`. It includes a vision‑p
 
 <pre>🟣 3D environment creation for training </pre>
 
-<pre>🟣 1. Progress Documentation </pre>
+🟣 1. Progress Documentation 
 
 The `Ryze Tello (DJI)` primarily perceives its environment through its forward-facing camera, making realistic visual environments critical for training. That's why my focus is on representing the world as realistically as possible. Below you will find the different techniques I've explored to achieve this goal, and further on, my pipeline for this task.
 
-<pre>🟣 2. Geometry reconstruction tools (point clouds) </pre>
+🟣 2. Geometry reconstruction tools (point clouds)
 
 After weeks of testing, I decided to move on from photogrammetry techniques for the following reasons:
 
@@ -49,13 +60,13 @@ Below is a summary of the tools I tested and their results:
 |`Polycam`| Produces deficient results, not accurate enough for reliable drone-training environments. Tested with an `iPhone 13 Pro`, `iPhone 15`, and `iPhone 16 Pro Max`.                                                                                                                                                                                                                           | ![image](/assets/Polycam.png) |
 |`RealityScan`| So far, the app delivering the best results, unfortunately, for `Linux` users it only runs under `Wine`, which means no export, import, or mesh manipulation tools are available. | ![image](/assets/image.png)   |
 
-<pre>🟣 3. Generative techniques tools (gaussian splats)</pre>
+🟣 3. Generative techniques tools (gaussian splats)
 
 Alongisde, I've been exploring generative techniques and so far, my favorite tool and the one I'm going to use to this step is `Marble World Labs`.
 
 ![](assets/example.png)
 
-<pre>🟣 4. 3DGS in Unreal Engine </pre>
+🟣 4. 3DGS in Unreal Engine
 
 Natively, `Unreal Engine` doesn't support `3D Gaussian Splats`, so I had to search for plugins. Most of them were also only packaged for `Windows`, which is a very common issue with plugins. Rebuilding and configuring the source code for `Linux` compatibility isn't too much effort in theory, but most public repos don't include the plugin's source code, making it impossible to get them working on `Linux`. This is what I found with the following plugins:
 
@@ -68,11 +79,11 @@ Natively, `Unreal Engine` doesn't support `3D Gaussian Splats`, so I had to sear
 | `NanoGaussianSplatting`              | [GitHub](https://github.com/TimChen1383/NanoGaussianSplatting) | Open source and the best one! Compiles on Linux and mimics Nanite's rendering system, allowing efficient 3DGS rendering. |
 | `GaussianSplatting`                  | [GitHub](https://github.com/Italink/GaussianSplattingForUnrealEngine) | Open source, compiles on Linux, but not optimised and very strict with .ply file formatting — breaks easily with compressed .ply files. |
 
-<pre>🟣 5. Virtual environment pipeline </pre>
+🟣 5. Virtual environment pipeline
 
 ![](assets/pipeline.svg)
 
-<pre>🟣 3DGS Database pre-training environments </pre>
+🟣 3DGS Database pre-training environments
 
 On Hugging Face there is a dataset available named `InteriorGS`. It provides high-quality 3D Gaussian Splatting representations with semantic bounding boxes and occupancy maps for each scene. It contains a total of 1,000 environments.
 > link: https://huggingface.co/datasets/spatialverse/InteriorGS
@@ -90,7 +101,7 @@ In this step, it is important to set up and import into Unreal the following ele
 
 The 3D model have to match with the 3D world in :
 
-<pre>🟣 1. Body dimensions  </pre>
+🟣 1. Body dimensions 
 
 | Description                  | Dimension (BBOX) | 
 |------------------------------|------------------|
@@ -98,7 +109,7 @@ The 3D model have to match with the 3D world in :
 | `body + propellers`          | 174x170x41 mm    | 
 | `body + propellers + guards` | 188x183x46 mm    | 
 
-<pre>🟣 2. Frontal cameras  </pre>
+🟣 2. Frontal cameras 
 
 | Property          | Real Tello value |
 |-------------------|------------------|
@@ -111,13 +122,72 @@ The 3D model have to match with the 3D world in :
 | `Video recording`   | HD: 1280x720        |
 | `FPS`               | 30                  |
 
-<pre>🟣 3. Vision Positioning System  </pre>
+🟣 3. Vision Positioning System 
 
 | Property             | Real Tello value | 
 |----------------------|------------------|
-| `camera`             | Underside        | 
-| `3D infrared module` | Underside             | 
+| `camera`             | front              | 
+| `3D infrared module` | Underside        | 
 
-## Resources 
+<pre>🟣 The 3DGS of the real-world replica environments </pre>
+
+TODO: Curation and selection of the envs that I will use for training. at this stage im thinkin in up to 50 env/
+
+# 🟣 6. Pre-Validation: Pipeline Performance and Architecture Decisions
+
+Before committing to a full training pipeline, I needed to answer a practical question: **can this stack actually run fast enough to train RL?**
+
+The challenge is that this pipeline stacks two computationally expensive processes — Unreal Engine rendering and reinforcement learning training. Each one alone is resource-heavy. Combined, poor architectural choices could make training unfeasibly slow. So before scaling to 50 environments, I ran a series of tests to validate my assumptions and benchmark the stack.
+
+---
+
+## Why Unreal Engine Is Expensive (and Why That Matters for RL)
+
+Unreal Engine is a DCC (Digital Content Creation) tool built for cinematic-quality rendering. That power comes at a cost:
+
+- **Shader compilation:** The first time you open a project, Unreal compiles thousands of shaders. These get cached for subsequent runs, but the initial hit is significant — and every new environment triggers new compilations.
+- **Editor overhead:** Running inside the Unreal Editor loads the full UI, debug tools, viewport rendering, and asset management systems. All of this consumes GPU and CPU resources that could otherwise go to simulation and training.
+- **Memory footprint:** Between the editor, the 3D Gaussian Splat visual layer, and the SAGE-3D collision meshes, a single environment can consume several GB of VRAM and RAM.
+
+For a sim2real pipeline where the RL agent needs thousands of episodes, every wasted frame-per-second compounds into hours of lost training time (biggest concern in the sim phase)
+
+## What I Tested
+
+### Editor Mode vs. Packaged Builds
+
+I ran the same environment in two configurations, fetching 300 frames with shape (84, 84, 3):
+
+Note: When analyzing GPU and CPU performance with btop, I noticed that the CPU cores were heavily loaded while the GPU was barely utilized during frame fetching.
+
+| Metric        | Editor Mode | Packaged Build |
+|---------------|-------------|----------------|
+| sustained FPS | 3.0         | 37.7           |
+| total time    | 100.00s     | 7.97 s         |
+| avg per frame | 333.3 ms    | 26.6 ms        |
+
+**Result:** Packaged builds gave a significant FPS improvement over running inside the editor. This makes sense — the packaged build strips out the editor UI, debug tools, and asset browser, leaving only the runtime renderer and game logic. For training, there is no reason to run from the editor.
+
+**Decision:** All 50 environments will be packaged into standalone builds before training begins. The upfront cost of packaging is paid once; the FPS gain compounds across every training episode.
+
+
+### Why UnrealCV as the RL Bridge
+
+I needed a plugin that could:
+
+1. Accept actions from a Python-based RL framework (movement, rotation commands)
+2. Return observations (RGB, depth) back to Python
+3. Run over TCP so the gym and the renderer can be separate processes
+4. Work with packaged builds, not just the editor
+
+UnrealCV checks all of these. It exposes a TCP server (default port 9000) inside the Unreal process, and the Python side connects as a client. The communication loop is:
+
+```
+Python Gym  ---(action)--→  UnrealCV TCP  --→  Drone Pawn moves
+Python Gym  ←--(obs/reward)---  UnrealCV TCP  ←--  Camera captures frame
+```
+
+This architecture also means I can run multiple packaged environments in parallel on different ports for future scaling.
+
+
 - https://www.youtube.com/watch?v=tjOZoX4DZGI&t=90s
 - https://ilyalandshut.artstation.com/projects/xzWeDY

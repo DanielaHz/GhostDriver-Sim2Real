@@ -4,6 +4,9 @@ unreal/SimEnvironment/Intermediate/
 unreal/SimEnvironment/Binaries/
 unreal/SimEnvironment/Saved/
 unreal/SimEnvironment/DerivedDataCache/
+unreal/SimEnvironment/Content/
+unreal/SimEnvironment/Build/
+
 *.VC.db
 *.opensdf
 *.sdf
