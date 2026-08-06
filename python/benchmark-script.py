@@ -8,7 +8,7 @@ import time
 client = api.UnrealCv_API(port=9000, ip='127.0.0.1', resolution=(84, 84))
 client.client.request('vset /camera/0/size 84 84')
 
-N = 3000
+N = 300
 print(f"Fetching {N} frames...")
 
 # Warm up (first few calls are always slower)
