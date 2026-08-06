@@ -177,6 +177,10 @@ public:
 	UPROPERTY(VisibleAnywhere, Category = "Import")
 	EGaussianQualityLevel ImportQuality = EGaussianQualityLevel::Medium;
 
+	/** Source coordinate convention used during import (reused on reimport) */
+	UPROPERTY(VisibleAnywhere, Category = "Import")
+	EPLYCoordinateConvention SourceCoordinateConvention = EPLYCoordinateConvention::ZUp_RightHanded;
+
 	/**
 	 * Whether Nanite-style LOD and culling is enabled for this asset
 	 * Enable via Asset Actions > Nanite in Content Browser

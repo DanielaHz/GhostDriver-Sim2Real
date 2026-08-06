@@ -16,6 +16,7 @@ NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianColorFormat();
 NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianPositionFormat();
 NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianQualityLevel();
 NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianSHFormat();
+NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention();
 NANOGS_API UScriptStruct* Z_Construct_UScriptStruct_FGaussianChunkInfo();
 NANOGS_API UScriptStruct* Z_Construct_UScriptStruct_FGaussianSplatData();
 NANOGS_API UScriptStruct* Z_Construct_UScriptStruct_FGaussianSplatViewData();
@@ -304,6 +305,70 @@ UEnum* Z_Construct_UEnum_NanoGS_EGaussianQualityLevel()
 }
 // ********** End Enum EGaussianQualityLevel *******************************************************
 
+// ********** Begin Enum EPLYCoordinateConvention **************************************************
+static FEnumRegistrationInfo Z_Registration_Info_UEnum_EPLYCoordinateConvention;
+static UEnum* EPLYCoordinateConvention_StaticEnum()
+{
+	if (!Z_Registration_Info_UEnum_EPLYCoordinateConvention.OuterSingleton)
+	{
+		Z_Registration_Info_UEnum_EPLYCoordinateConvention.OuterSingleton = GetStaticEnum(Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention, (UObject*)Z_Construct_UPackage__Script_NanoGS(), TEXT("EPLYCoordinateConvention"));
+	}
+	return Z_Registration_Info_UEnum_EPLYCoordinateConvention.OuterSingleton;
+}
+template<> NANOGS_API UEnum* StaticEnum<EPLYCoordinateConvention>()
+{
+	return EPLYCoordinateConvention_StaticEnum();
+}
+struct Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics
+{
+#if WITH_METADATA
+	static constexpr UECodeGen_Private::FMetaDataPairParam Enum_MetaDataParams[] = {
+		{ "BlueprintType", "true" },
+		{ "COLMAP_YDown.Comment", "/** Right-handed, Y-down (raw COLMAP/OpenCV training output) */" },
+		{ "COLMAP_YDown.DisplayName", "COLMAP (Y-down)" },
+		{ "COLMAP_YDown.Name", "EPLYCoordinateConvention::COLMAP_YDown" },
+		{ "COLMAP_YDown.ToolTip", "Right-handed, Y-down (raw COLMAP/OpenCV training output)" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/**\n * Source coordinate convention used by the input PLY file.\n * 3DGS/PLY exporters are not standardized on a single convention: raw COLMAP\n * training output is right-handed with Y pointing down, while PlayCanvas\n * SuperSplat / InteriorGS-style exports (paired with SAGE-3D style collision\n * meshes authored as Z-up) are already right-handed Z-up.\n */" },
+#endif
+		{ "ModuleRelativePath", "Public/GaussianDataTypes.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Source coordinate convention used by the input PLY file.\n3DGS/PLY exporters are not standardized on a single convention: raw COLMAP\ntraining output is right-handed with Y pointing down, while PlayCanvas\nSuperSplat / InteriorGS-style exports (paired with SAGE-3D style collision\nmeshes authored as Z-up) are already right-handed Z-up." },
+#endif
+		{ "ZUp_RightHanded.Comment", "/** Right-handed, Z-up (e.g. PlayCanvas SuperSplat / InteriorGS exports) */" },
+		{ "ZUp_RightHanded.DisplayName", "Z-up (SuperSplat / InteriorGS)" },
+		{ "ZUp_RightHanded.Name", "EPLYCoordinateConvention::ZUp_RightHanded" },
+		{ "ZUp_RightHanded.ToolTip", "Right-handed, Z-up (e.g. PlayCanvas SuperSplat / InteriorGS exports)" },
+	};
+#endif // WITH_METADATA
+	static constexpr UECodeGen_Private::FEnumeratorParam Enumerators[] = {
+		{ "EPLYCoordinateConvention::COLMAP_YDown", (int64)EPLYCoordinateConvention::COLMAP_YDown },
+		{ "EPLYCoordinateConvention::ZUp_RightHanded", (int64)EPLYCoordinateConvention::ZUp_RightHanded },
+	};
+	static const UECodeGen_Private::FEnumParams EnumParams;
+};
+const UECodeGen_Private::FEnumParams Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics::EnumParams = {
+	(UObject*(*)())Z_Construct_UPackage__Script_NanoGS,
+	nullptr,
+	"EPLYCoordinateConvention",
+	"EPLYCoordinateConvention",
+	Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics::Enumerators,
+	RF_Public|RF_Transient|RF_MarkAsNative,
+	UE_ARRAY_COUNT(Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics::Enumerators),
+	EEnumFlags::None,
+	(uint8)UEnum::ECppForm::EnumClass,
+	METADATA_PARAMS(UE_ARRAY_COUNT(Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics::Enum_MetaDataParams), Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics::Enum_MetaDataParams)
+};
+UEnum* Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention()
+{
+	if (!Z_Registration_Info_UEnum_EPLYCoordinateConvention.InnerSingleton)
+	{
+		UECodeGen_Private::ConstructUEnum(Z_Registration_Info_UEnum_EPLYCoordinateConvention.InnerSingleton, Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention_Statics::EnumParams);
+	}
+	return Z_Registration_Info_UEnum_EPLYCoordinateConvention.InnerSingleton;
+}
+// ********** End Enum EPLYCoordinateConvention ****************************************************
+
 // ********** Begin ScriptStruct FGaussianSplatData ************************************************
 static FStructRegistrationInfo Z_Registration_Info_UScriptStruct_FGaussianSplatData;
 class UScriptStruct* FGaussianSplatData::StaticStruct()
@@ -468,6 +533,7 @@ struct Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plug
 		{ EGaussianColorFormat_StaticEnum, TEXT("EGaussianColorFormat"), &Z_Registration_Info_UEnum_EGaussianColorFormat, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2645459499U) },
 		{ EGaussianSHFormat_StaticEnum, TEXT("EGaussianSHFormat"), &Z_Registration_Info_UEnum_EGaussianSHFormat, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 2886842483U) },
 		{ EGaussianQualityLevel_StaticEnum, TEXT("EGaussianQualityLevel"), &Z_Registration_Info_UEnum_EGaussianQualityLevel, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 98877216U) },
+		{ EPLYCoordinateConvention_StaticEnum, TEXT("EPLYCoordinateConvention"), &Z_Registration_Info_UEnum_EPLYCoordinateConvention, CONSTRUCT_RELOAD_VERSION_INFO(FEnumReloadVersionInfo, 4185321714U) },
 	};
 	static constexpr FStructRegisterCompiledInInfo ScriptStructInfo[] = {
 		{ FGaussianSplatData::StaticStruct, Z_Construct_UScriptStruct_FGaussianSplatData_Statics::NewStructOps, TEXT("GaussianSplatData"), &Z_Registration_Info_UScriptStruct_FGaussianSplatData, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGaussianSplatData), 322035832U) },
@@ -475,7 +541,7 @@ struct Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plug
 		{ FGaussianChunkInfo::StaticStruct, Z_Construct_UScriptStruct_FGaussianChunkInfo_Statics::NewStructOps, TEXT("GaussianChunkInfo"), &Z_Registration_Info_UScriptStruct_FGaussianChunkInfo, CONSTRUCT_RELOAD_VERSION_INFO(FStructReloadVersionInfo, sizeof(FGaussianChunkInfo), 892824785U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h__Script_NanoGS_3423909022(TEXT("/Script/NanoGS"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h__Script_NanoGS_3811792041(TEXT("/Script/NanoGS"),
 	nullptr, 0,
 	Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h__Script_NanoGS_Statics::ScriptStructInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h__Script_NanoGS_Statics::ScriptStructInfo),
 	Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h__Script_NanoGS_Statics::EnumInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h__Script_NanoGS_Statics::EnumInfo));

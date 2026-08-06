@@ -5,7 +5,6 @@
 #include "CoreMinimal.h"
 #include "GaussianDataTypes.h"
 #include "GaussianClusterTypes.h"
-#include "GaussianClusterBuilder.h"
 
 /**
  * Builder class for constructing hierarchical cluster structures from Gaussian splat data.
@@ -32,12 +31,12 @@ public:
 		int32 MaxChildrenPerCluster = GaussianClusterConstants::MaxChildrenPerCluster;
 
 		/** Whether to reorder splat data for cluster locality */
-		bool bReorderSplats = true;
+		bool bReorderSplats = true;                                                     
 
 		/** Whether to generate LOD splats for parent clusters */
 		bool bGenerateLOD = true;
 
-		/** LOD reduction ratio - how many originajl splats per LOD splat (default: divide by 4) */
+		/** LOD reduction ratio - how many original splats per LOD splat (default: divide by 4) */
 		int32 LODReductionRatio = 4;
 
 		FBuildSettings()
@@ -46,12 +45,15 @@ public:
 			, bReorderSplats(true)
 			, bGenerateLOD(true)
 			, LODReductionRatio(4)
-				{}
+		{}
 	};
 
 	/**
 	 * Build cluster hierarchy from splat data
 	 *
+	 * @param InOutSplats Splat data array - will be reordered if bReorderSplats is true
+	 * @param OutHierarchy Output cluster hierarchy
+	 * @param Settings Build configuration
 	 * @return true if successful, false on error
 	 */
 	static bool BuildClusterHierarchy(
@@ -134,6 +136,8 @@ private:
 	/**
 	 * Calculate bounding volume for a parent cluster from its children
 	 *
+	 * @param ParentCluster Parent cluster to update
+	 * @param ChildClusters All clusters (to look up children)
 	 */
 	static void CalculateParentClusterBounds(
 		FGaussianCluster& ParentCluster,

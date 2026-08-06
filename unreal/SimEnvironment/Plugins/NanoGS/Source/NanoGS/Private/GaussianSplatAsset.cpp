@@ -441,7 +441,6 @@ void UGaussianSplatAsset::CreateColorTextureFromData()
 	ColorTexture->AddressY = TA_Clamp;
 	ColorTexture->NeverStream = true;
 	ColorTexture->LODGroup = TEXTUREGROUP_Pixels2D;
-	ColorTexture->MipGenSettings = TMGS_NoMipmaps;
 
 	// Create mip 0
 	FTexture2DMipMap* Mip = new FTexture2DMipMap();
@@ -628,7 +627,7 @@ bool UGaussianSplatAsset::BuildNaniteClusterHierarchy()
 	TArray<FGaussianSplatData> SplatData;
 	FString ErrorMessage;
 
-	if (!FPLYFileReader::ReadPLYFile(SourceFilePath, SplatData, ErrorMessage))
+	if (!FPLYFileReader::ReadPLYFile(SourceFilePath, SplatData, ErrorMessage, nullptr, SourceCoordinateConvention))
 	{
 		UE_LOG(LogTemp, Error, TEXT("BuildNaniteClusterHierarchy: Failed to read PLY file: %s"), *ErrorMessage);
 		return false;
@@ -729,7 +728,7 @@ void UGaussianSplatAsset::ClearNaniteClusterHierarchy()
 			TArray<FGaussianSplatData> SplatData;
 			FString ErrorMessage;
 
-			if (FPLYFileReader::ReadPLYFile(SourceFilePath, SplatData, ErrorMessage))
+			if (FPLYFileReader::ReadPLYFile(SourceFilePath, SplatData, ErrorMessage, nullptr, SourceCoordinateConvention))
 			{
 				// Reinitialize with original splats only (no LOD)
 				InitializeFromSplatData(SplatData, ImportQuality);
@@ -885,7 +884,6 @@ void UGaussianSplatAsset::CreateThumbnailTextureFromData()
 	ThumbnailTexture->CompressionSettings = TC_Default;
 	ThumbnailTexture->Filter           = TF_Bilinear;
 	ThumbnailTexture->NeverStream      = true;
-	ThumbnailTexture->MipGenSettings   = TMGS_NoMipmaps;
 
 	FTexture2DMipMap* Mip = new FTexture2DMipMap();
 	PlatformData->Mips.Add(Mip);

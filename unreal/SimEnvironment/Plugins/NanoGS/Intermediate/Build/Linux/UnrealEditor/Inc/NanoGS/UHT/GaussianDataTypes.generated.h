@@ -17,7 +17,7 @@
 PRAGMA_DISABLE_DEPRECATION_WARNINGS
 
 // ********** Begin ScriptStruct FGaussianSplatData ************************************************
-#define FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h_69_GENERATED_BODY \
+#define FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h_86_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FGaussianSplatData_Statics; \
 	NANOGS_API static class UScriptStruct* StaticStruct();
 
@@ -26,7 +26,7 @@ struct FGaussianSplatData;
 // ********** End ScriptStruct FGaussianSplatData **************************************************
 
 // ********** Begin ScriptStruct FGaussianSplatViewData ********************************************
-#define FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h_121_GENERATED_BODY \
+#define FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h_138_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FGaussianSplatViewData_Statics; \
 	NANOGS_API static class UScriptStruct* StaticStruct();
 
@@ -35,7 +35,7 @@ struct FGaussianSplatViewData;
 // ********** End ScriptStruct FGaussianSplatViewData **********************************************
 
 // ********** Begin ScriptStruct FGaussianChunkInfo ************************************************
-#define FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h_159_GENERATED_BODY \
+#define FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianDataTypes_h_176_GENERATED_BODY \
 	friend struct Z_Construct_UScriptStruct_FGaussianChunkInfo_Statics; \
 	NANOGS_API static class UScriptStruct* StaticStruct();
 
@@ -99,5 +99,15 @@ enum class EGaussianQualityLevel : uint8;
 template<> struct TIsUEnumClass<EGaussianQualityLevel> { enum { Value = true }; };
 template<> NANOGS_API UEnum* StaticEnum<EGaussianQualityLevel>();
 // ********** End Enum EGaussianQualityLevel *******************************************************
+
+// ********** Begin Enum EPLYCoordinateConvention **************************************************
+#define FOREACH_ENUM_EPLYCOORDINATECONVENTION(op) \
+	op(EPLYCoordinateConvention::COLMAP_YDown) \
+	op(EPLYCoordinateConvention::ZUp_RightHanded) 
+
+enum class EPLYCoordinateConvention : uint8;
+template<> struct TIsUEnumClass<EPLYCoordinateConvention> { enum { Value = true }; };
+template<> NANOGS_API UEnum* StaticEnum<EPLYCoordinateConvention>();
+// ********** End Enum EPLYCoordinateConvention ****************************************************
 
 PRAGMA_ENABLE_DEPRECATION_WARNINGS

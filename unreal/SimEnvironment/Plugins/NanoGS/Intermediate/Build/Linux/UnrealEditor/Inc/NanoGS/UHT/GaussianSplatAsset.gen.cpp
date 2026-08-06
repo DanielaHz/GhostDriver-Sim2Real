@@ -25,6 +25,7 @@ NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianColorFormat();
 NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianPositionFormat();
 NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianQualityLevel();
 NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EGaussianSHFormat();
+NANOGS_API UEnum* Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention();
 NANOGS_API UScriptStruct* Z_Construct_UScriptStruct_FGaussianChunkInfo();
 NANOGS_API UScriptStruct* Z_Construct_UScriptStruct_FGaussianClusterHierarchy();
 UPackage* Z_Construct_UPackage__Script_NanoGS();
@@ -807,6 +808,16 @@ struct Z_Construct_UClass_UGaussianSplatAsset_Statics
 		{ "ToolTip", "Quality level used during import" },
 #endif
 	};
+	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_SourceCoordinateConvention_MetaData[] = {
+		{ "Category", "Import" },
+#if !UE_BUILD_SHIPPING
+		{ "Comment", "/** Source coordinate convention used during import (reused on reimport) */" },
+#endif
+		{ "ModuleRelativePath", "Public/GaussianSplatAsset.h" },
+#if !UE_BUILD_SHIPPING
+		{ "ToolTip", "Source coordinate convention used during import (reused on reimport)" },
+#endif
+	};
 	static constexpr UECodeGen_Private::FMetaDataPairParam NewProp_bEnableNanite_MetaData[] = {
 		{ "Category", "Nanite" },
 #if !UE_BUILD_SHIPPING
@@ -882,6 +893,8 @@ struct Z_Construct_UClass_UGaussianSplatAsset_Statics
 	static const UECodeGen_Private::FStrPropertyParams NewProp_SourceFilePath;
 	static const UECodeGen_Private::FBytePropertyParams NewProp_ImportQuality_Underlying;
 	static const UECodeGen_Private::FEnumPropertyParams NewProp_ImportQuality;
+	static const UECodeGen_Private::FBytePropertyParams NewProp_SourceCoordinateConvention_Underlying;
+	static const UECodeGen_Private::FEnumPropertyParams NewProp_SourceCoordinateConvention;
 	static void NewProp_bEnableNanite_SetBit(void* Obj);
 	static const UECodeGen_Private::FBoolPropertyParams NewProp_bEnableNanite;
 	static const UECodeGen_Private::FStructPropertyParams NewProp_ClusterHierarchy;
@@ -933,6 +946,8 @@ const UECodeGen_Private::FIntPropertyParams Z_Construct_UClass_UGaussianSplatAss
 const UECodeGen_Private::FStrPropertyParams Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_SourceFilePath = { "SourceFilePath", nullptr, (EPropertyFlags)0x0010000000020001, UECodeGen_Private::EPropertyGenFlags::Str, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGaussianSplatAsset, SourceFilePath), METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SourceFilePath_MetaData), NewProp_SourceFilePath_MetaData) };
 const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_ImportQuality_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
 const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_ImportQuality = { "ImportQuality", nullptr, (EPropertyFlags)0x0010000000020001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGaussianSplatAsset, ImportQuality), Z_Construct_UEnum_NanoGS_EGaussianQualityLevel, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_ImportQuality_MetaData), NewProp_ImportQuality_MetaData) }; // 98877216
+const UECodeGen_Private::FBytePropertyParams Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_SourceCoordinateConvention_Underlying = { "UnderlyingType", nullptr, (EPropertyFlags)0x0000000000000000, UECodeGen_Private::EPropertyGenFlags::Byte, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, 0, nullptr, METADATA_PARAMS(0, nullptr) };
+const UECodeGen_Private::FEnumPropertyParams Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_SourceCoordinateConvention = { "SourceCoordinateConvention", nullptr, (EPropertyFlags)0x0010000000020001, UECodeGen_Private::EPropertyGenFlags::Enum, RF_Public|RF_Transient|RF_MarkAsNative, nullptr, nullptr, 1, STRUCT_OFFSET(UGaussianSplatAsset, SourceCoordinateConvention), Z_Construct_UEnum_NanoGS_EPLYCoordinateConvention, METADATA_PARAMS(UE_ARRAY_COUNT(NewProp_SourceCoordinateConvention_MetaData), NewProp_SourceCoordinateConvention_MetaData) }; // 4185321714
 void Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_bEnableNanite_SetBit(void* Obj)
 {
 	((UGaussianSplatAsset*)Obj)->bEnableNanite = 1;
@@ -964,6 +979,8 @@ const UECodeGen_Private::FPropertyParamsBase* const Z_Construct_UClass_UGaussian
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_SourceFilePath,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_ImportQuality_Underlying,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_ImportQuality,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_SourceCoordinateConvention_Underlying,
+	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_SourceCoordinateConvention,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_bEnableNanite,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_ClusterHierarchy,
 	(const UECodeGen_Private::FPropertyParamsBase*)&Z_Construct_UClass_UGaussianSplatAsset_Statics::NewProp_OriginalSplatCount,
@@ -1012,10 +1029,10 @@ IMPLEMENT_FSTRUCTUREDARCHIVE_SERIALIZER(UGaussianSplatAsset)
 struct Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianSplatAsset_h__Script_NanoGS_Statics
 {
 	static constexpr FClassRegisterCompiledInInfo ClassInfo[] = {
-		{ Z_Construct_UClass_UGaussianSplatAsset, UGaussianSplatAsset::StaticClass, TEXT("UGaussianSplatAsset"), &Z_Registration_Info_UClass_UGaussianSplatAsset, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGaussianSplatAsset), 1856085703U) },
+		{ Z_Construct_UClass_UGaussianSplatAsset, UGaussianSplatAsset::StaticClass, TEXT("UGaussianSplatAsset"), &Z_Registration_Info_UClass_UGaussianSplatAsset, CONSTRUCT_RELOAD_VERSION_INFO(FClassReloadVersionInfo, sizeof(UGaussianSplatAsset), 2395985927U) },
 	};
 };
-static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianSplatAsset_h__Script_NanoGS_1946882493(TEXT("/Script/NanoGS"),
+static FRegisterCompiledInInfo Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianSplatAsset_h__Script_NanoGS_804627638(TEXT("/Script/NanoGS"),
 	Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianSplatAsset_h__Script_NanoGS_Statics::ClassInfo, UE_ARRAY_COUNT(Z_CompiledInDeferFile_FID_Documents_GhostPilot_unreal_SimEnvironment_Plugins_NanoGS_Source_NanoGS_Public_GaussianSplatAsset_h__Script_NanoGS_Statics::ClassInfo),
 	nullptr, 0,
 	nullptr, 0);

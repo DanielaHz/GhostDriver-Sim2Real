@@ -97,8 +97,9 @@ EReimportResult::Type UGaussianSplatAssetFactory::Reimport(UObject* Obj)
 	// Preserve Nanite setting before reimport
 	const bool bWasNaniteEnabled = Asset->IsNaniteEnabled();
 
-	// Use the original quality level
+	// Use the original quality level and coordinate convention
 	QualityLevel = Asset->ImportQuality;
+	SourceCoordinateConvention = Asset->SourceCoordinateConvention;
 
 	UGaussianSplatAsset* ReimportedAsset = ImportPLYFile(
 		Asset->SourceFilePath,
@@ -142,7 +143,7 @@ UGaussianSplatAsset* UGaussianSplatAssetFactory::ImportPLYFile(
 	FString ErrorMessage;
 	int32 DetectedSHBands = 0;
 
-	if (!FPLYFileReader::ReadPLYFile(FilePath, SplatData, ErrorMessage, &DetectedSHBands))
+	if (!FPLYFileReader::ReadPLYFile(FilePath, SplatData, ErrorMessage, &DetectedSHBands, SourceCoordinateConvention))
 	{
 		UE_LOG(LogTemp, Error, TEXT("Failed to read PLY file: %s"), *ErrorMessage);
 		return nullptr;
@@ -165,8 +166,9 @@ UGaussianSplatAsset* UGaussianSplatAssetFactory::ImportPLYFile(
 		return nullptr;
 	}
 
-	// Store source file path
+	// Store source file path and coordinate convention (used again on reimport)
 	Asset->SourceFilePath = FilePath;
+	Asset->SourceCoordinateConvention = SourceCoordinateConvention;
 
 	// Set the detected SH band count BEFORE initializing (CompressSH uses this)
 	Asset->SHBands = DetectedSHBands;

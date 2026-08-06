@@ -4,7 +4,8 @@
 #include "Misc/FileHelper.h"
 #include "HAL/PlatformFileManager.h"
 
-bool FPLYFileReader::ReadPLYFile(const FString& FilePath, TArray<FGaussianSplatData>& OutSplats, FString& OutError, int32* OutSHBands)
+bool FPLYFileReader::ReadPLYFile(const FString& FilePath, TArray<FGaussianSplatData>& OutSplats, FString& OutError, int32* OutSHBands,
+	EPLYCoordinateConvention Convention)
 {
 	OutSplats.Empty();
 
@@ -75,7 +76,7 @@ bool FPLYFileReader::ReadPLYFile(const FString& FilePath, TArray<FGaussianSplatD
 	}
 
 	// Read vertex data using streamed I/O
-	if (!ReadVertexData(FileHandle.Get(), Header, OutSplats, OutError))
+	if (!ReadVertexData(FileHandle.Get(), Header, OutSplats, OutError, Convention))
 	{
 		return false;
 	}
@@ -287,7 +288,8 @@ bool FPLYFileReader::ParseHeader(IFileHandle* FileHandle, FPLYHeader& OutHeader,
 	return true;
 }
 
-bool FPLYFileReader::ReadVertexData(IFileHandle* FileHandle, const FPLYHeader& Header, TArray<FGaussianSplatData>& OutSplats, FString& OutError)
+bool FPLYFileReader::ReadVertexData(IFileHandle* FileHandle, const FPLYHeader& Header, TArray<FGaussianSplatData>& OutSplats, FString& OutError,
+	EPLYCoordinateConvention Convention)
 {
 	OutSplats.SetNum(Header.VertexCount);
 
@@ -338,39 +340,63 @@ bool FPLYFileReader::ReadVertexData(IFileHandle* FileHandle, const FPLYHeader& H
 			const uint8* VertexData = ChunkBuffer.GetData() + i * VertexStride;
 			FGaussianSplatData& Splat = OutSplats[VertexIndex];
 
-			// Position - Convert from Y-down (COLMAP/OpenCV convention) to Z-up (Unreal)
-			// PLY: X-right, Y-down, Z-forward (right-handed) -> UE: X-forward, Y-right, Z-up (left-handed)
-			// Most 3DGS training pipelines use COLMAP which has Y pointing down
+			// Position - convert from the source PLY convention to UE (X-forward, Y-right, Z-up, left-handed)
 			// Multiply by 100 to convert from meters (PLY) to centimeters (UE)
 			constexpr float MetersToUE = 100.0f;
 			float PlyX = GetPropertyFloat(VertexData, Header, TEXT("x"));
 			float PlyY = GetPropertyFloat(VertexData, Header, TEXT("y"));
 			float PlyZ = GetPropertyFloat(VertexData, Header, TEXT("z"));
-			Splat.Position.X = PlyZ * MetersToUE;    // PLY Z -> UE X (forward)
-			Splat.Position.Y = PlyX * MetersToUE;    // PLY X -> UE Y (right)
-			Splat.Position.Z = -PlyY * MetersToUE;   // PLY -Y -> UE Z (up, negated because PLY Y points down)
 
-			// Rotation (quaternion) - Convert coordinate system
-			// PLY uses (w, x, y, z) format with Y-down (COLMAP convention)
-			// Pattern: when position axis is NOT negated, quaternion component IS negated (and vice versa)
-			// Position: PLY.X -> UE.Y (not negated), PLY.Y -> UE.-Z (negated), PLY.Z -> UE.X (not negated)
 			float QW = GetPropertyFloat(VertexData, Header, TEXT("rot_0"));
 			float QX = GetPropertyFloat(VertexData, Header, TEXT("rot_1"));
 			float QY = GetPropertyFloat(VertexData, Header, TEXT("rot_2"));
 			float QZ = GetPropertyFloat(VertexData, Header, TEXT("rot_3"));
-			Splat.Rotation.W = QW;
-			Splat.Rotation.X = -QZ;   // PLY Z -> UE X (negated: position not negated)
-			Splat.Rotation.Y = -QX;   // PLY X -> UE Y (negated: position not negated)
-			Splat.Rotation.Z = QY;    // PLY Y -> UE Z (not negated: position was negated)
 
-			// Scale - Reorder to match coordinate system conversion
-			// Scale is always positive magnitude, no negation needed
 			float ScaleX = GetPropertyFloat(VertexData, Header, TEXT("scale_0"));
 			float ScaleY = GetPropertyFloat(VertexData, Header, TEXT("scale_1"));
 			float ScaleZ = GetPropertyFloat(VertexData, Header, TEXT("scale_2"));
-			Splat.Scale.X = ScaleZ;  // PLY Z -> UE X
-			Splat.Scale.Y = ScaleX;  // PLY X -> UE Y
-			Splat.Scale.Z = ScaleY;  // PLY Y -> UE Z
+
+			if (Convention == EPLYCoordinateConvention::ZUp_RightHanded)
+			{
+				// PLY: X-right, Y-forward, Z-up (right-handed) -> UE: X-forward, Y-right, Z-up (left-handed)
+				// PlayCanvas SuperSplat / InteriorGS-style exports (paired with Z-up SAGE-3D collision
+				// meshes) are already Z-up; converting RH->LH here only requires swapping X and Y.
+				Splat.Position.X = PlyY * MetersToUE;   // PLY Y -> UE X (forward)
+				Splat.Position.Y = PlyX * MetersToUE;   // PLY X -> UE Y (right)
+				Splat.Position.Z = PlyZ * MetersToUE;   // PLY Z -> UE Z (up, unchanged)
+
+				// Same rule as the COLMAP branch below: a quaternion component is negated exactly when
+				// its corresponding position axis is NOT negated (here, none of the position axes are
+				// negated, so all three vector components flip sign).
+				Splat.Rotation.W = QW;
+				Splat.Rotation.X = -QY;   // PLY Y -> UE X (negated)
+				Splat.Rotation.Y = -QX;   // PLY X -> UE Y (negated)
+				Splat.Rotation.Z = -QZ;   // PLY Z -> UE Z (negated)
+
+				Splat.Scale.X = ScaleY;  // PLY Y -> UE X
+				Splat.Scale.Y = ScaleX;  // PLY X -> UE Y
+				Splat.Scale.Z = ScaleZ;  // PLY Z -> UE Z
+			}
+			else
+			{
+				// Convert from Y-down (COLMAP/OpenCV convention) to Z-up (Unreal)
+				// PLY: X-right, Y-down, Z-forward (right-handed) -> UE: X-forward, Y-right, Z-up (left-handed)
+				// Most raw 3DGS training pipelines use COLMAP which has Y pointing down
+				Splat.Position.X = PlyZ * MetersToUE;    // PLY Z -> UE X (forward)
+				Splat.Position.Y = PlyX * MetersToUE;    // PLY X -> UE Y (right)
+				Splat.Position.Z = -PlyY * MetersToUE;   // PLY -Y -> UE Z (up, negated because PLY Y points down)
+
+				// Pattern: when position axis is NOT negated, quaternion component IS negated (and vice versa)
+				// Position: PLY.X -> UE.Y (not negated), PLY.Y -> UE.-Z (negated), PLY.Z -> UE.X (not negated)
+				Splat.Rotation.W = QW;
+				Splat.Rotation.X = -QZ;   // PLY Z -> UE X (negated: position not negated)
+				Splat.Rotation.Y = -QX;   // PLY X -> UE Y (negated: position not negated)
+				Splat.Rotation.Z = QY;    // PLY Y -> UE Z (not negated: position was negated)
+
+				Splat.Scale.X = ScaleZ;  // PLY Z -> UE X
+				Splat.Scale.Y = ScaleX;  // PLY X -> UE Y
+				Splat.Scale.Z = ScaleY;  // PLY Y -> UE Z
+			}
 
 			// Opacity
 			Splat.Opacity = GetPropertyFloat(VertexData, Header, TEXT("opacity"));

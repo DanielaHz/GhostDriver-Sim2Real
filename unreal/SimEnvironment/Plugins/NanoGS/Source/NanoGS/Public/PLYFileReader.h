@@ -43,9 +43,11 @@ public:
 	 * @param OutSplats Output array of splat data
 	 * @param OutError Error message if reading failed
 	 * @param OutSHBands Optional output for detected SH band count (0-3)
+	 * @param Convention Source coordinate convention the PLY was authored in
 	 * @return True if successful
 	 */
-	static bool ReadPLYFile(const FString& FilePath, TArray<FGaussianSplatData>& OutSplats, FString& OutError, int32* OutSHBands = nullptr);
+	static bool ReadPLYFile(const FString& FilePath, TArray<FGaussianSplatData>& OutSplats, FString& OutError, int32* OutSHBands = nullptr,
+		EPLYCoordinateConvention Convention = EPLYCoordinateConvention::COLMAP_YDown);
 
 	/**
 	 * Check if a file is a valid PLY file
@@ -72,9 +74,11 @@ private:
 	 * @param Header Parsed header information
 	 * @param OutSplats Output array of splat data
 	 * @param OutError Error message if reading failed
+	 * @param Convention Source coordinate convention the PLY was authored in
 	 * @return True if successful
 	 */
-	static bool ReadVertexData(IFileHandle* FileHandle, const FPLYHeader& Header, TArray<FGaussianSplatData>& OutSplats, FString& OutError);
+	static bool ReadVertexData(IFileHandle* FileHandle, const FPLYHeader& Header, TArray<FGaussianSplatData>& OutSplats, FString& OutError,
+		EPLYCoordinateConvention Convention);
 
 	/**
 	 * Linearize splat data from raw PLY values

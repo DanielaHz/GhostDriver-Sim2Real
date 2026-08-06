@@ -47,6 +47,14 @@ public:
 	/** Import quality level (currently unused - always uses Float32 positions for maximum accuracy) */
 	EGaussianQualityLevel QualityLevel = EGaussianQualityLevel::VeryHigh;
 
+	/**
+	 * Source coordinate convention of the PLY being imported.
+	 * Defaults to Z-up since that's what PlayCanvas SuperSplat / InteriorGS exports (and the
+	 * paired SAGE-3D collision meshes) use; switch to COLMAP (Y-down) for raw training output.
+	 */
+	UPROPERTY(EditAnywhere, Category = "Import")
+	EPLYCoordinateConvention SourceCoordinateConvention = EPLYCoordinateConvention::ZUp_RightHanded;
+
 private:
 	/**
 	 * Import a PLY file and create/update a Gaussian Splat asset

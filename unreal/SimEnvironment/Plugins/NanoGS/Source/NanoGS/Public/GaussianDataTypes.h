@@ -60,6 +60,23 @@ enum class EGaussianQualityLevel : uint8
 };
 
 /**
+ * Source coordinate convention used by the input PLY file.
+ * 3DGS/PLY exporters are not standardized on a single convention: raw COLMAP
+ * training output is right-handed with Y pointing down, while PlayCanvas
+ * SuperSplat / InteriorGS-style exports (paired with SAGE-3D style collision
+ * meshes authored as Z-up) are already right-handed Z-up.
+ */
+UENUM(BlueprintType)
+enum class EPLYCoordinateConvention : uint8
+{
+	/** Right-handed, Y-down (raw COLMAP/OpenCV training output) */
+	COLMAP_YDown	UMETA(DisplayName = "COLMAP (Y-down)"),
+
+	/** Right-handed, Z-up (e.g. PlayCanvas SuperSplat / InteriorGS exports) */
+	ZUp_RightHanded	UMETA(DisplayName = "Z-up (SuperSplat / InteriorGS)")
+};
+
+/**
  * Raw splat data read from PLY file (CPU-side, before compression)
  * Total: ~248 bytes per splat
  */
