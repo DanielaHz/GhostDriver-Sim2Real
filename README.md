@@ -133,7 +133,7 @@ The 3D model have to match with the 3D world in :
 
 TODO: Curation and selection of the envs that I will use for training. at this stage im thinkin in up to 50 env/
 
-# 🟣 6. Pre-Validation: Pipeline Performance and Architecture Decisions
+🟣 6. Pre-Validation: Pipeline Performance and Architecture Decisions
 
 Before committing to a full training pipeline, I needed to answer a practical question: **can this stack actually run fast enough to train RL?**
 
@@ -141,7 +141,7 @@ The challenge is that this pipeline stacks two computationally expensive process
 
 ---
 
-## Why Unreal Engine Is Expensive (and Why That Matters for RL)
+🟣 6.1 Why Unreal Engine Is Expensive (and Why That Matters for RL)
 
 Unreal Engine is a DCC (Digital Content Creation) tool built for cinematic-quality rendering. That power comes at a cost:
 
@@ -151,9 +151,9 @@ Unreal Engine is a DCC (Digital Content Creation) tool built for cinematic-quali
 
 For a sim2real pipeline where the RL agent needs thousands of episodes, every wasted frame-per-second compounds into hours of lost training time (biggest concern in the sim phase)
 
-## What I Tested
+🟣 6.2  What I Tested
 
-### Editor Mode vs. Packaged Builds
+🟣 6.2.1 Editor Mode vs. Packaged Builds
 
 I ran the same environment in two configurations, fetching 300 frames with shape (84, 84, 3):
 
@@ -170,7 +170,7 @@ Note: When analyzing GPU and CPU performance with btop, I noticed that the CPU c
 **Decision:** All 50 environments will be packaged into standalone builds before training begins. The upfront cost of packaging is paid once; the FPS gain compounds across every training episode.
 
 
-### Why UnrealCV as the RL Bridge
+🟣 6.3 Why UnrealCV as the RL Bridge
 
 I needed a plugin that could:
 
