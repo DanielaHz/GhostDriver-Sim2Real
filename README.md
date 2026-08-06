@@ -145,9 +145,11 @@ The challenge is that this pipeline stacks two computationally expensive process
 
 Unreal Engine is a DCC (Digital Content Creation) tool built for cinematic-quality rendering. That power comes at a cost:
 
+```
 - **Shader compilation:** The first time you open a project, Unreal compiles thousands of shaders. These get cached for subsequent runs, but the initial hit is significant — and every new environment triggers new compilations.
 - **Editor overhead:** Running inside the Unreal Editor loads the full UI, debug tools, viewport rendering, and asset management systems. All of this consumes GPU and CPU resources that could otherwise go to simulation and training.
 - **Memory footprint:** Between the editor, the 3D Gaussian Splat visual layer, and the SAGE-3D collision meshes, a single environment can consume several GB of VRAM and RAM.
+```
 
 For a sim2real pipeline where the RL agent needs thousands of episodes, every wasted frame-per-second compounds into hours of lost training time (biggest concern in the sim phase)
 
@@ -173,11 +175,12 @@ I ran the same environment in two configurations, fetching 300 frames with shape
 <pre> 🟣 6.3 Why UnrealCV as the RL Bridge </pre>
 
 I needed a plugin that could:
-
+```
 1. Accept actions from a Python-based RL framework (movement, rotation commands)
 2. Return observations (RGB, depth) back to Python
 3. Run over TCP so the gym and the renderer can be separate processes
 4. Work with packaged builds, not just the editor
+```
 
 UnrealCV checks all of these. It exposes a TCP server (default port 9000) inside the Unreal process, and the Python side connects as a client. The communication loop is:
 
