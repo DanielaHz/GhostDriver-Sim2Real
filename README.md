@@ -161,9 +161,9 @@ I ran the same environment in two configurations, fetching 300 frames with shape
 
 | Metric        | Editor Mode | Packaged Build |
 |---------------|-------------|----------------|
-| sustained FPS | 3.0         | 37.7           |
-| total time    | 100.00s     | 7.97 s         |
-| avg per frame | 333.3 ms    | 26.6 ms        |
+| `sustained FPS` | 3.0         | 37.7           |
+| `total time`    | 100.00s     | 7.97 s         |
+| `avg per frame` | 333.3 ms    | 26.6 ms        |
 
 **Result:** Packaged builds gave a significant FPS improvement over running inside the editor. This makes sense — the packaged build strips out the editor UI, debug tools, and asset browser, leaving only the runtime renderer and game logic. For training, there is no reason to run from the editor.
 
