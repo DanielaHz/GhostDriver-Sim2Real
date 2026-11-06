@@ -1,7 +1,9 @@
+
 # Autonomous Drone Navigation with Reinforcement Learning
 
 Reinforcement learning agent that teaches a drone to navigate autonomously in Unreal Engine, then deploys the learned policy on a real DJI Ryze Tello.
 
+![](/assets/banner.svg)
 ## Table of Contents
 
 - [Overview](#overview)

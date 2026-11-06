@@ -5,8 +5,9 @@ import time
 # Connect. Set resolution LOW — you train on 84x84, so request small frames.
 # NOTE: the `resolution` kwarg above is not actually applied by the client (see
 # unrealcv/api.py: "the resolution is not used"), so the size must be set explicitly.
-client = api.UnrealCv_API(port=9000, ip='127.0.0.1', resolution=(84, 84))
-client.client.request('vset /camera/0/size 84 84')
+client = api.UnrealCv_API(port=9000, ip='127.0.0.1', resolution=(86, 86))
+client.client.request('vset /camera/0/fov 82.6')
+client.client.request('vset /camera/0/size 86 86')
 
 N = 300
 print(f"Fetching {N} frames...")
