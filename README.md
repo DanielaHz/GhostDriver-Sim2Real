@@ -322,24 +322,6 @@ The goal is to pick one environment and use it to test the whole pipeline, then 
 
 > ⬜ Planned: export the trained policy and run it on the real Tello in the restaurant.
 
----
-
-## Getting Started
-
-> **TODO:** Add when the code is ready: requirements, building `NanoGaussianSplatting` on Linux, enabling `UnrealCV`, and running the Python side.
-
-## Repository Structure
-
-> **TODO:** Add a short description of each folder.
-
-```
-.
-├── assets/        # Images used in this README
-└── ...
-```
-
----
-
 ## Appendix: Drone Flight Basics
 
 An aircraft relies on four fundamental forces:
