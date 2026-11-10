@@ -119,10 +119,10 @@ The Tello has a front-facing camera and a vision positioning system with a 3D in
 
 **General specs**
 
-| Property | Value |
-|----------|-------|
-| `Weight` | 87 g |
-| `Max speed` | 28.8 km/h |
+| Property                | Value |
+|-------------------------|-------|
+| `Weight (body + guards)` | 87 g |
+| `Max speed overall`     | 28.8 km/h |
 
 **Front camera**
 
@@ -224,19 +224,50 @@ Before training in the restaurant replica, the drone pre-trains on diverse indoo
 
 These elements need to be set up and imported into Unreal:
 
-- The 3D model of the drone
-- The 3DGS replica of the restaurant, with bounding boxes and collision mesh, via `NanoGaussianSplatting`
+- The 3D model of the drone and the properties of the simulation 
 - The 3DGS pre-training environments from InteriorGS
+- The 3DGS replica of the restaurant, with bounding boxes and collision mesh, via `NanoGaussianSplatting` (TRAINING FACE)
 
 #### 3.1 Drone Model
 
-The 3D model must match the real Tello's dimensions, weight, speed, camera and sensors (see [The Drone: DJI Ryze Tello](#the-drone-dji-ryze-tello)).
+The 3D model must match the real Tello’s dimensions, weight, speed, camera and sensors. Before modeling, it is worth understanding how the Tello is controlled, because that decides what actually needs to be simulated.
 
-> **TODO:** Describe how the drone model was built or sourced and how the camera was configured.
+##### 3.1.1 Control interface
+The Tello SDK does not give direct access to the motors but we can sent remote control command with the value of four velocity setpoints: left/right, forward/backward, up/down and yaw rotation, each from -100 to 100. 
+The drone’s onboard flight controller converts these into motor speeds. The SDK also streams telemetry (attitude, velocity, height, battery), but the sensors and flight parameters cannot be configured. 
+As a result, rotor aerodynamics do not need to be simulated. The simulator only has to reproduce how the drone responds to these four commands covering the next three aspects:
 
-#### 3.2 Importing Environments and Collision Meshes
+- **Motion response**: maximum speed on each axis, how quickly the drone reaches it, and the delay between a command and the drone’s reaction.
+- **Camera**: field of view, resolution, mounting position and angle, and image delay. These matter as much as motion when the policy learns from images.
+- **Dimensions**: for collisions and for how the drone appears in the scene.
 
-> **TODO:** Describe the import steps for the splats and the collision meshes.
+Wind is not considered here because is an indoor space and collision with Pedestrian is avoid it because the place will be empty. 
+
+##### 3.1.2 Modeling in Maya
+
+The drone was modeled in Maya from measurements taken manually on the real Tello. The model is built in centimeters to match Unreal's units, so it imports at the correct scale.
+
+![](assets/Drone.png)
+The hierarchy separates the body, the four propellers and the camera, so each part can be handled independently. 
+
+Propeller rotation is not simulated, since the policy only depends on how the drone moves in response to commands; spinning propellers would be purely cosmetic. Even so, each propeller's pivot is placed exactly at its rotation center, so they can be animated later without wobbling if a visual touch is wanted.
+
+The camera sits at the real lens position and angle, because even small offsets change what the policy sees.
+
+The speeds for each input were obtained from the master’s thesis Identification and Flight Control of Robotic Helicopter, in which the authors measured the Ryze Tello as part of their research
+
+| Property                       | Value       |
+|--------------------------------|-------------|
+ Max horizontal speed per input | 1.065 m/s   |
+ Max vertical speed per input   | 0.447 m/s   |
+ Max yaw rate per input         | 0.955 rad/s |
+ Command delay                  | 0.6 s       |
+ Camera FOV / resolution	       | 82.6° / 960 × 720 (4:3)  |
+ Weight / dimensions	           | 80 gr       |
+
+
+#### 3.2 Importing Environments and Collision Meshes**
+> TODO
 
 ---
 
@@ -264,11 +295,9 @@ I ran the same environment in both configurations, fetching 300 frames of shape 
 | Total time | 100.00 s | 7.97 s |
 | Avg per frame | 333.3 ms | 26.6 ms |
 
-**Observation:** While monitoring editor mode with `btop`, the CPU cores were heavily loaded while the GPU was barely used. This suggests the bottleneck is on the CPU, not in rendering.
-
-**Result:** The packaged build ran about **12.5× faster**. It strips out the editor UI, debug tools and asset browser, leaving only the runtime renderer and game logic.
-
-**Decision:** All training environments will be packaged as standalone builds. The packaging cost is paid once, and the FPS gain pays off on every episode.
+- **Observation:** While monitoring editor mode with `btop`, the CPU cores were heavily loaded while the GPU was barely used. This suggests the bottleneck is on the CPU, not in rendering.
+- **Result:** The packaged build ran about **12.5× faster**. It strips out the editor UI, debug tools and asset browser, leaving only the runtime renderer and game logic.
+- **Decision:** All training environments will be packaged as standalone builds. The packaging cost is paid once, and the FPS gain pays off on every episode.
 
 #### 4.3 Why UnrealCV as the RL Bridge
 
@@ -286,15 +315,11 @@ Python Gym  ---(action)-->  UnrealCV TCP  -->  Drone pawn moves
 Python Gym  <---(obs)-----  UnrealCV TCP  <--  Camera captures frame
 ```
 
-The reward is computed on the Python side from the returned observations. This setup also allows several packaged environments to run in parallel on different ports later on.
-
----
-
 ### 5. First Test: One Environment
 
 #### 5.1 Environment Choice
 
-The goal is to pick one environment and use it to test the whole pipeline, then pre-train the drone on basic movement. I chose a **store environment with many stands**, which forces the drone to navigate between them, similar to moving between tables in a restaurant.
+The goal is to pick one environment and use it to test if the drone moves as expected in this one. I chose a **store environment with many stands**, which forces the drone to navigate between them, similar to moving between tables in a restaurant.
 
 **Note:** Environments with many detailed objects can show visual artifacts that look distorted when moving through them. This may add noise to the drone's learning.
 
@@ -341,4 +366,3 @@ An aircraft relies on four fundamental forces:
 - [SuperSplat editor (online Gaussian splat editor)](https://superspl.at/editor)
 - [InteriorGS dataset](https://huggingface.co/datasets/spatialverse/InteriorGS)
 - [UnrealCV](https://unrealcv.org/)
-
