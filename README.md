@@ -65,18 +65,18 @@ The project succeeds when the drone can complete all of them:
 
 ## Project Status
 
-| Stage | Status |
-|-------|--------|
-| Hardware and drone selection | ✅ Done |
-| Environment creation research (photogrammetry, Gaussian splats, Unreal plugins) | ✅ Done |
-| Virtual environment pipeline | ✅ Done |
-| Import InteriorGS environment into Unreal | ✅ Done |
-| Performance validation (editor vs packaged build) | ✅ Done |
-| Restaurant replica environment | ⬜ Planned |
-| Curate pre-training environments (up to 50) | ⬜ Planned |
+| Stage | Status         |
+|-------|----------------|
+| Hardware and drone selection | ✅ Done         |
+| Environment creation research (photogrammetry, Gaussian splats, Unreal plugins) | ✅ Done         |
+| Virtual environment pipeline | ✅ Done         |
+| Import InteriorGS environment into Unreal | ✅ Done         |
+| Performance validation (editor vs packaged build) | ✅ Done         |
+| Restaurant replica environment | ✅ Done            |
+| Curate pre-training environments (up to 50) | ⬜ Planned      |
 | First test: drone flying and controlled through UnrealCV | 🔄 In progress |
-| RL training | ⬜ Planned |
-| Sim-to-real deployment on the Tello | ⬜ Planned |
+| RL training | ⬜ Planned      |
+| Sim-to-real deployment on the Tello | ⬜ Planned      |
 
 
 ---
@@ -188,10 +188,9 @@ It fits this project's constraints well:
 Unlike Marble, the result comes from real footage of the space rather than
 generation, so it should be a more faithful replica.
 
-**Status:** 🔄 Training in progress.
+![](assets/3DGS.gif)
 
-> **TODO:** Add the 360° camera model, how the space was shot, training time,
-
+The full documentation for generating 3DGS from 360° cameras is available at the following link: https://graphicsjournal.com/blog/11-3d-reconstruction-with-3dgs/
 
 #### 1.5 Getting 3DGS into Unreal on Linux
 
@@ -331,9 +330,34 @@ The goal is to pick one environment and use it to test if the drone moves as exp
 
 > 🔄 In progress
 
+
 #### 5.3 Controlling the Drone Through UnrealCV
 
-> 🔄 In progress
+The drone is controlled by an RL policy that lives in Python and knows nothing
+about Unreal, where the simulation and the drone's digital twin live.
+
+To bridge the two, the simulation copies the API of the real Tello. The policy
+sends the same commands and receives the same data whether it is talking to
+the simulated drone or the real one, and the simulated drone reproduces the
+real Tello's behaviour (speeds, command delay, camera).
+
+The architecture follows a client-server approach:
+
+​```text
+Sim:   policy ──▶ SimTello (Python) ──UnrealCV──▶ BP_Drone (Unreal)
+Real:  policy ──▶ Tello (djitellopy) ──Wi-Fi────▶ real Tello
+​```
+
+- **SimTello** (Python) exposes the same methods as djitellopy
+  (`takeoff`, `land`, `send_rc_control`, `get_current_state`, ...). It
+  forwards commands to Unreal and converts the returned data into the
+  Tello's format.
+- **UnrealCV** carries messages in both directions between Python and Unreal.
+- **BP_Drone** (Unreal) executes the commands like the real Tello's onboard
+  software, and returns the drone's state and camera image.
+
+Switching between simulation and the real drone requires changing a single
+line in the policy code.s
 
 #### 5.4 Testing Collisions and Physics
 
