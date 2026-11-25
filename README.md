@@ -225,7 +225,7 @@ These elements need to be set up and imported into Unreal:
 
 - The 3D model of the drone and the properties of the simulation 
 - The 3DGS pre-training environments from InteriorGS
-- The 3DGS replica of the restaurant, with bounding boxes and collision mesh, via `NanoGaussianSplatting` (TRAINING FACE)
+- The 3DGS replica of the restaurant, with bounding boxes and collision mesh, via `NanoGaussianSplatting` (TRAINING PHASE :)
 
 #### 3.1 Drone Model
 
